@@ -1,6 +1,7 @@
 package com.mixky.mvprxjava.base;
 
 import com.mixky.mvprxjava.bean.InfoBean;
+import com.mixky.mvprxjava.utils.Constant;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -18,4 +19,6 @@ public interface ApiService {
     //retrofit的网络请求方法，传入网址。
     @GET
     Observable<InfoBean> loadInfoData(@Url String user);
+    @GET("")
+    Observable<InfoBean> getData();
 }

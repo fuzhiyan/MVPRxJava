@@ -26,6 +26,7 @@ public class InfoPresenterImp extends BasePresenter<IView, InfoBean> implements 
     public void loadInfoData() {
         //持有Model的实例，当请求数据的时候，调用Model的请求数据的方法
         infoModel.loadInfoData(this);
+
     }
 
     @Override

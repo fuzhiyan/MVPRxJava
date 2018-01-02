@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mixky.mvprxjava.bean.InfoBean;
-import com.mixky.mvprxjava.presenter.InfoPresenter;
 import com.mixky.mvprxjava.presenter.InfoPresenterImp;
 import com.mixky.mvprxjava.view.IView;
 
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements IView {
         //初始化进度条
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("正在请求获取数据,请稍等!!!");
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
