@@ -3,6 +3,7 @@ package com.mixky.mvprxjava.presenter;
 import android.content.Context;
 
 import com.mixky.mvprxjava.base.BasePresenter;
+import com.mixky.mvprxjava.bean.GoodsBean;
 import com.mixky.mvprxjava.bean.InfoBean;
 import com.mixky.mvprxjava.model.InfoModel;
 import com.mixky.mvprxjava.view.IView;
@@ -11,7 +12,7 @@ import com.mixky.mvprxjava.view.IView;
  * Created by Administrator on 2017/12/28.
  */
 
-public class InfoPresenterImp extends BasePresenter<IView, InfoBean> implements InfoPresenter {
+public class InfoPresenterImp extends BasePresenter<IView, GoodsBean> implements InfoPresenter {
 
     private InfoModel infoModel;
     private Context context;

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.mixky.mvprxjava.base.ApiService;
 import com.mixky.mvprxjava.base.BaseModel;
 import com.mixky.mvprxjava.base.IBaseRequestCallBack;
+import com.mixky.mvprxjava.bean.GoodsBean;
 import com.mixky.mvprxjava.bean.InfoBean;
 import com.mixky.mvprxjava.utils.Constant;
 
@@ -18,7 +19,7 @@ import rx.subscriptions.CompositeSubscription;
  * Created by Administrator on 2017/12/28.
  */
 
-public class InfoModel extends BaseModel implements IModel<InfoBean> {
+public class InfoModel extends BaseModel implements IModel<GoodsBean> {
     private Context context = null;
     private ApiService apiService;
     private CompositeSubscription mCompositeSubscription;
@@ -35,7 +36,7 @@ public class InfoModel extends BaseModel implements IModel<InfoBean> {
     public void loadInfoData(final IBaseRequestCallBack iBaseRequestCallBack) {
 
         //拼接参数。(拼接网址，也可以使用动态传参)
-        StringBuffer stringBuffer = new StringBuffer();
+       /* StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(Constant.BASE_URL)
                 .append("pics/channel/")
                 .append("getAllRecomPicByTag.jsp?")
@@ -43,17 +44,18 @@ public class InfoModel extends BaseModel implements IModel<InfoBean> {
                 .append("&tag=全部")
                 .append("&start=15")
                 .append("&len=15");
-        System.out.println(stringBuffer.toString());
+        System.out.println(stringBuffer.toString());*/
         //将subscribe添加到subscription，用于注销subscribe
-        mCompositeSubscription.add((Subscription) apiService.loadInfoData(stringBuffer.toString())
+        mCompositeSubscription.add((Subscription) apiService.getUserInfo("西红柿","4d0f828dee12c5b58dfa3b5a8463a5d6")
                 .observeOn(AndroidSchedulers.mainThread())//指定事件消费线程
                 .subscribeOn(Schedulers.io()) //指定 subscribe() 发生在 IO 线程
-                .subscribe(new Subscriber<InfoBean>() {
+                .subscribe(new Subscriber<GoodsBean>() {
                     @Override
                     public void onStart() {
                         super.onStart();
                         //onStart它总是在 subscribe 所发生的线程被调用 ,如果你的subscribe不是主线程，则会出错，则需要指定线程;
                         iBaseRequestCallBack.beforeRequest();
+                        iBaseRequestCallBack.requestComplete();
                     }
 
                     @Override
@@ -69,9 +71,10 @@ public class InfoModel extends BaseModel implements IModel<InfoBean> {
                     }
 
                     @Override
-                    public void onNext(InfoBean infoBean) {
+                    public void onNext(GoodsBean goodsBean) {
                         //回调接口：请求成功，获取实体类对象
-                        iBaseRequestCallBack.requestSuccess(infoBean);
+                        iBaseRequestCallBack.requestSuccess(goodsBean);
+                        iBaseRequestCallBack.requestSuccess(goodsBean);
                     }
                 }));
     }
@@ -83,6 +86,7 @@ public class InfoModel extends BaseModel implements IModel<InfoBean> {
         if (mCompositeSubscription.isUnsubscribed()) {
             mCompositeSubscription.clear();  //注销
             mCompositeSubscription.unsubscribe();
+
         }
     }
 }

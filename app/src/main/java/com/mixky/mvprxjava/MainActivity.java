@@ -1,6 +1,7 @@
 package com.mixky.mvprxjava;
 
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.mixky.mvprxjava.bean.GoodsBean;
 import com.mixky.mvprxjava.bean.InfoBean;
 import com.mixky.mvprxjava.presenter.InfoPresenterImp;
 import com.mixky.mvprxjava.view.IView;
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements IView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+
+        }
         initView();
     }
 
@@ -64,11 +69,12 @@ public class MainActivity extends AppCompatActivity implements IView {
     }
 
     @Override
-    public void loadDataSuccess(InfoBean data) {
-        List<InfoBean.AllItemsBean> list = data.all_items;
+    public void loadDataSuccess(GoodsBean data) {
+//        List<InfoBean.AllItemsBean> list = data.all_items;
+        List<GoodsBean.ResultBean.DataBean> list = data.result.data;
         textView.setVisibility(View.VISIBLE);
         textView.setText(list.get(4).title);
-        Glide.with(this).load(list.get(4).pic_url).into(imageView);
+        Glide.with(this).load(list.get(4).steps.get(4).img).into(imageView);
         progressDialog.dismiss();
     }
 
