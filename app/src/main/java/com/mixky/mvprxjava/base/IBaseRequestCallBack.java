@@ -13,8 +13,8 @@ public interface IBaseRequestCallBack<T> {
     void beforeRequest();
 
     /**
-     * @descriptoin 请求异常
      * @param throwable 异常类型
+     * @descriptoin 请求异常
      */
     void requestError(Throwable throwable);
 
@@ -24,8 +24,8 @@ public interface IBaseRequestCallBack<T> {
     void requestComplete();
 
     /**
-     * @descriptoin 请求成功
      * @param callBack 根据业务返回相应的数据
+     * @descriptoin 请求成功
      */
     void requestSuccess(T callBack);
 
